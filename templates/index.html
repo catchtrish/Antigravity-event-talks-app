@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigQuery Release Notes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>BigQuery</h2>
+                    <span>Release Hub</span>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search updates...">
+            </div>
+
+            <div class="filter-section">
+                <h3>Filter by Category</h3>
+                <ul class="filter-list">
+                    <li class="filter-item active" data-type="all">
+                        <span class="dot all"></span> All Updates
+                        <span class="count" id="count-all">0</span>
+                    </li>
+                    <li class="filter-item" data-type="feature">
+                        <span class="dot feature"></span> Features
+                        <span class="count" id="count-feature">0</span>
+                    </li>
+                    <li class="filter-item" data-type="announcement">
+                        <span class="dot announcement"></span> Announcements
+                        <span class="count" id="count-announcement">0</span>
+                    </li>
+                    <li class="filter-item" data-type="issue">
+                        <span class="dot issue"></span> Issues / Fixes
+                        <span class="count" id="count-issue">0</span>
+                    </li>
+                    <li class="filter-item" data-type="deprecation">
+                        <span class="dot deprecation"></span> Deprecations
+                        <span class="count" id="count-deprecation">0</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>Data fetched from official Google Cloud feeds.</p>
+            </div>
+        </aside>
+
+        <!-- Main Feed Content -->
+        <main class="main-content">
+            <header class="feed-header">
+                <div class="header-title">
+                    <h1>BigQuery Release Notes</h1>
+                    <p class="subtitle">Stay updated with the latest features, announcements, and issues.</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button id="refresh-btn" class="btn btn-primary" title="Refresh notes">
+                        <i class="fa-solid fa-arrows-rotate spinner-icon"></i>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Feed Container -->
+            <div class="feed-timeline" id="notes-feed">
+                <!-- Skeleton loader -->
+                <div class="skeleton-loader">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Twitter Composer Modal / Floating composer -->
+    <div class="tweet-modal" id="tweet-modal">
+        <div class="tweet-modal-content">
+            <div class="tweet-modal-header">
+                <h3>Draft Tweet</h3>
+                <button class="close-btn" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="tweet-modal-body">
+                <div class="tweet-profile">
+                    <div class="profile-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name">Google Cloud Updates</span>
+                        <span class="profile-handle">@bq_updates</span>
+                    </div>
+                </div>
+                <textarea id="tweet-textarea" rows="5" maxlength="280"></textarea>
+                <div class="char-counter"><span id="char-count">0</span>/280</div>
+            </div>
+            <div class="tweet-modal-footer">
+                <button class="btn btn-secondary" id="btn-copy-tweet">
+                    <i class="fa-regular fa-copy"></i> Copy Text
+                </button>
+                <button class="btn btn-twitter" id="btn-send-tweet">
+                    <i class="fa-brands fa-x-twitter"></i> Tweet Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
