@@ -274,8 +274,55 @@ function updateCharCounter() {
     }
 }
 
+// Export filtered release notes as CSV format
+function exportToCSV() {
+    if (notesData.length === 0) {
+        showToast('No data available to export.');
+        return;
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += `"Date","Category","Update Details","Source Link"\r\n`;
+
+    notesData.forEach(day => {
+        day.updates.forEach(update => {
+            // Check matches current filters
+            const matchesFilter = currentFilter === 'all' || update.type.toLowerCase() === currentFilter;
+            
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = update.html;
+            const plainText = tempDiv.textContent || tempDiv.innerText || "";
+            
+            const matchesSearch = searchQuery === '' || 
+                plainText.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                update.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                day.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+            if (matchesFilter && matchesSearch) {
+                // Escape quotes for CSV format
+                const escapedDate = day.title.replace(/"/g, '""');
+                const escapedType = update.type.replace(/"/g, '""');
+                const escapedText = plainText.replace(/\s+/g, ' ').replace(/"/g, '""').trim();
+                const escapedLink = day.link.replace(/"/g, '""');
+
+                csvContent += `"${escapedDate}","${escapedType}","${escapedText}","${escapedLink}"\r\n`;
+            }
+        });
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `bigquery_release_notes_${currentFilter}_export.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('CSV export downloaded!');
+}
+
 // Event Listeners
 refreshBtn.addEventListener('click', fetchReleaseNotes);
+document.getElementById('export-csv-btn').addEventListener('click', exportToCSV);
 
 searchInput.addEventListener('input', (e) => {
     searchQuery = e.target.value;
