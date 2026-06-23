@@ -121,7 +121,7 @@ function renderFeed() {
                     <span class="category-tag">${update.type}</span>
                     <div class="card-actions">
                         <button class="icon-btn copy-btn" title="Copy text"><i class="fa-regular fa-copy"></i></button>
-                        <button class="icon-btn share-btn" title="Compose Tweet"><i class="fa-brands fa-x-twitter"></i></button>
+                        <button class="icon-btn share-btn" title="Compose Tweet"><i class="fa-brands fa-twitter"></i></button>
                     </div>
                 </div>
                 <div class="card-body">
