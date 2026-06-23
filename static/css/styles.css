@@ -367,17 +367,18 @@ body {
 .card-actions {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
 .icon-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     cursor: pointer;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -387,11 +388,19 @@ body {
 .icon-btn:hover {
     background-color: var(--bg-tertiary);
     color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+.icon-btn.share-btn {
+    color: #ffffff;
+    background-color: var(--twitter-color);
+    border-color: var(--twitter-color);
 }
 
 .icon-btn.share-btn:hover {
-    color: var(--twitter-color);
-    background-color: rgba(29, 161, 242, 0.1);
+    background-color: var(--twitter-color-hover);
+    border-color: var(--twitter-color-hover);
+    transform: scale(1.05);
 }
 
 /* Content Inside Cards */
